@@ -2,8 +2,9 @@ package com.stackingrule.dianping.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.xml.ws.RequestWrapper;
+
 
 /*
 *Created by Stackingrule 2019.12.16
@@ -14,7 +15,7 @@ import javax.xml.ws.RequestWrapper;
 public class UserController {
 
     @RequestMapping("/test")
-    @RequestBody
+    @ResponseBody
     public String test() {
         return "test";
     }
