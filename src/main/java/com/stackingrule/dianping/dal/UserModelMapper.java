@@ -1,6 +1,8 @@
 package com.stackingrule.dianping.dal;
 
 import com.stackingrule.dianping.model.UserModel;
+import org.apache.ibatis.annotations.Param;
+
 
 public interface UserModelMapper {
     /**
