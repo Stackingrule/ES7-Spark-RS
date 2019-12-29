@@ -8,7 +8,7 @@ public enum EmBusinessError {
 
     //通用的错误类型10000开头
     NO_OBJECT_FOUND(10001, "请求对象不存在"),
-    UNKONWN_ERROR(10001, "未知错误"),
+    UNKNOWN_ERROR(10001, "未知错误"),
     NO_HANDLER_FOUND(10003, "找不到执行的操作路径"),
     BIND_EXCEPTION_ERROR(10004,"请求参数错误"),
     PARAMETER_VALIDATION_ERROR(10005,"请求参数校验失败"),

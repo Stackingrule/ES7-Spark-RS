@@ -1,8 +1,8 @@
 package com.stackingrule.dianping.common;
 
 /*
-* Created by Stackingrule on 2019/12/29
- */
+  * Created by Stackingrule on 2019/12/29
+*/
 public class CommonError {
 
     //错误码
@@ -15,6 +15,11 @@ public class CommonError {
     public CommonError(Integer errCode, String errMsg) {
         this.errCode = errCode;
         this.errMsg = errMsg;
+    }
+
+    public CommonError(EmBusinessError emBusinessError) {
+        this.errCode = emBusinessError.getErrCode();
+        this.errMsg = emBusinessError.getErrMsg();
     }
 
     public Integer getErrCode() {
