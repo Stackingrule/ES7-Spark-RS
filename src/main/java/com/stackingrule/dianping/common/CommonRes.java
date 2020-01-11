@@ -42,3 +42,4 @@ public class CommonRes {
         this.data = data;
     }
 }
+

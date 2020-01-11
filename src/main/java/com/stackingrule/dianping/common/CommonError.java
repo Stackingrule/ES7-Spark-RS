@@ -22,6 +22,9 @@ public class CommonError {
         this.errMsg = emBusinessError.getErrMsg();
     }
 
+    public CommonError(EmBusinessError noObjectFound, String fail) {
+    }
+
     public Integer getErrCode() {
         return errCode;
     }
