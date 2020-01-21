@@ -2,14 +2,11 @@ package com.stackingrule.dianping.service;
 
 import com.stackingrule.dianping.common.BusinessException;
 import com.stackingrule.dianping.common.EmBusinessError;
+import com.stackingrule.dianping.dal.UserModelMapper;
+import com.stackingrule.dianping.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-
-
-import com.stackingrule.dianping.dal.UserModelMapper;
-import com.stackingrule.dianping.model.UserModel;
-import com.stackingrule.dianping.service.UserService;
 import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Encoder;
 
@@ -25,6 +22,7 @@ import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserModelMapper userModelMapper;
 
