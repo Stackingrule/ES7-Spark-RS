@@ -38,9 +38,10 @@ public class UserServiceImpl implements UserService {
         registerUser.setPassword(encodeByMd5(registerUser.getPassword()));
         registerUser.setCreatedAt(new Date());
         registerUser.setUpdatedAt(new Date());
-        try {
+
+        try{
             userModelMapper.insertSelective(registerUser);
-        } catch (DuplicateKeyException ex) {
+        }catch (DuplicateKeyException ex){
             throw new BusinessException(EmBusinessError.REGISTER_DUP_FAIL);
         }
 
@@ -58,15 +59,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer countAllUser() {
-        return null;
+        return userModelMapper.countAllUser();
     }
 
     private String encodeByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        // 确定计算方法
+        //确认计算方法MD5
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         BASE64Encoder base64Encoder = new BASE64Encoder();
         return base64Encoder.encode(messageDigest.digest(str.getBytes("utf-8")));
 
     }
-
 }

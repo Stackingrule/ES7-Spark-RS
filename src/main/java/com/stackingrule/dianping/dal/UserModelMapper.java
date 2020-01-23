@@ -1,6 +1,7 @@
 package com.stackingrule.dianping.dal;
 
 import com.stackingrule.dianping.model.UserModel;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserModelMapper {
     /**
@@ -51,5 +52,7 @@ public interface UserModelMapper {
      */
     int updateByPrimaryKey(UserModel record);
 
-    UserModel selectByTelphoneAndPassword(String telphone, String encodeByMd5);
+    UserModel selectByTelphoneAndPassword(@Param("telphone") String telphone, @Param("password") String password);
+
+    Integer countAllUser();
 }
