@@ -1,4 +1,4 @@
-package com.stackingrule.dianping.controller;
+package com.stackingrule.dianping.controller.admin;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.stackingrule.dianping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sun.misc.BASE64Encoder;
 
+import com.stackingrule.dianping.common.AdminPermission;
 import com.stackingrule.dianping.common.BusinessException;
 import com.stackingrule.dianping.common.EmBusinessError;
+import com.stackingrule.dianping.service.UserService;
 
 @Controller("/admin/admin")
 @RequestMapping("/admin/admin")
@@ -28,8 +29,9 @@ public class AdminController {
     @Value("${admin.email}")
     private String email;
 
+
     @Value("${admin.encryptPassword}")
-    private String encryptPassword;
+    private String encrptyPassord;
 
     @Autowired
     private HttpServletRequest httpServletRequest;
@@ -37,12 +39,18 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+
+
     public static final String CURRENT_ADMIN_SESSION = "currentAdminSession";
 
     @RequestMapping("/index")
-    public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("/admin/admin/index");
+    @AdminPermission
+    public ModelAndView index(){
 
+        ModelAndView modelAndView = new ModelAndView("/admin/admin/index");
+        modelAndView.addObject("userCount",userService.countAllUser());
+        modelAndView.addObject("CONTROLLER_NAME","admin");
+        modelAndView.addObject("ACTION_NAME","index");
         return modelAndView;
     }
 
@@ -59,7 +67,7 @@ public class AdminController {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "用户名密码不能为空");
         }
-        if(email.equals(this.email) && encodeByMd5(password).equals(this.encryptPassword)){
+        if(email.equals(this.email) && encodeByMd5(password).equals(this.encrptyPassord)){
             //登录成功
             httpServletRequest.getSession().setAttribute(CURRENT_ADMIN_SESSION,email);
             return "redirect:/admin/admin/index";
@@ -68,7 +76,6 @@ public class AdminController {
         }
 
     }
-
     private String encodeByMd5(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         //确认计算方法MD5
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -76,5 +83,4 @@ public class AdminController {
         return base64Encoder.encode(messageDigest.digest(str.getBytes("utf-8")));
 
     }
-
 }
