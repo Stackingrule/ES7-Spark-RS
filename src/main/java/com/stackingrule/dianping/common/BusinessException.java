@@ -1,8 +1,5 @@
 package com.stackingrule.dianping.common;
 
-/*
- * Created by Stackingrule on 2019/12/29
- */
 
 public class BusinessException extends Exception {
     private CommonError commonError;

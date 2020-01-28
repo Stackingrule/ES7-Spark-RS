@@ -1,8 +1,5 @@
 package com.stackingrule.dianping.common;
 
-/*
-* Created byStackingrule 0n 2019/12/29
- */
 public class CommonRes {
 
     //表明读经请求的返回处理结果，"success"或"fail"

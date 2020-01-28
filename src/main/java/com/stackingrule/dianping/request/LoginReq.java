@@ -1,7 +1,7 @@
 package com.stackingrule.dianping.request;
 
-
 import javax.validation.constraints.NotBlank;
+
 
 public class LoginReq {
     @NotBlank(message = "手机号不能为空")

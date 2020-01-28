@@ -1,8 +1,6 @@
 package com.stackingrule.dianping.common;
 
-/*
-  * Created by Stackingrule on 2019/12/29
-*/
+
 public class CommonError {
     //错误码
     private Integer errCode;

@@ -1,14 +1,13 @@
 package com.stackingrule.dianping.controller.admin;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.stackingrule.dianping.common.AdminPermission;
+import com.stackingrule.dianping.common.BusinessException;
+import com.stackingrule.dianping.common.CommonRes;
+import com.stackingrule.dianping.common.EmBusinessError;
 import com.stackingrule.dianping.service.CategoryService;
 import com.stackingrule.dianping.service.SellerService;
 import com.stackingrule.dianping.service.ShopService;
+import com.stackingrule.dianping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,14 +15,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import sun.misc.BASE64Encoder;
 
-import com.stackingrule.dianping.common.AdminPermission;
-import com.stackingrule.dianping.common.BusinessException;
-import com.stackingrule.dianping.common.EmBusinessError;
-import com.stackingrule.dianping.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 @Controller("/admin/admin")
 @RequestMapping("/admin/admin")
@@ -43,10 +42,10 @@ public class AdminController {
     private UserService userService;
 
     @Autowired
-    private ShopService shopService;
+    private CategoryService categoryService;
 
     @Autowired
-    private CategoryService categoryService;
+    private ShopService shopService;
 
     @Autowired
     private SellerService sellerService;
@@ -57,13 +56,12 @@ public class AdminController {
     @RequestMapping("/index")
     @AdminPermission
     public ModelAndView index(){
-
         ModelAndView modelAndView = new ModelAndView("/admin/admin/index");
 
-        modelAndView.addObject("userCount", userService.countAllUser());
+        modelAndView.addObject("userCount",userService.countAllUser());
         modelAndView.addObject("shopCount",shopService.countAllShop());
         modelAndView.addObject("categoryCount",categoryService.countAllCategory());
-        modelAndView.addObject("sellerCount", sellerService.countAllSeller());
+        modelAndView.addObject("sellerCount",sellerService.countAllSeller());
         modelAndView.addObject("CONTROLLER_NAME","admin");
         modelAndView.addObject("ACTION_NAME","index");
         return modelAndView;
@@ -78,7 +76,7 @@ public class AdminController {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@RequestParam(name="email")String email,
-                        @RequestParam(name="password")String password ) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+                              @RequestParam(name="password")String password ) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(password)) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "用户名密码不能为空");
         }

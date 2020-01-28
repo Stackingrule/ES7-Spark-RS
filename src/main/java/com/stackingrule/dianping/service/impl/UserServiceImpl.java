@@ -1,9 +1,10 @@
-package com.stackingrule.dianping.service;
+package com.stackingrule.dianping.service.impl;
 
 import com.stackingrule.dianping.common.BusinessException;
 import com.stackingrule.dianping.common.EmBusinessError;
 import com.stackingrule.dianping.dal.UserModelMapper;
 import com.stackingrule.dianping.model.UserModel;
+import com.stackingrule.dianping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-
-/*
- *Created by Stackingrule 2019.12.16
- */
 
 @Service
 public class UserServiceImpl implements UserService {

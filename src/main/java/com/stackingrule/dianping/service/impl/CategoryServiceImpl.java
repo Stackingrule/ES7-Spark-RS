@@ -1,9 +1,10 @@
-package com.stackingrule.dianping.service;
+package com.stackingrule.dianping.service.impl;
 
 import com.stackingrule.dianping.common.BusinessException;
 import com.stackingrule.dianping.common.EmBusinessError;
 import com.stackingrule.dianping.dal.CategoryModelMapper;
 import com.stackingrule.dianping.model.CategoryModel;
+import com.stackingrule.dianping.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryModelMapper categoryModelMapper;
@@ -21,15 +22,16 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     @Transactional
     public CategoryModel create(CategoryModel categoryModel) throws BusinessException {
-
         categoryModel.setCreatedAt(new Date());
         categoryModel.setUpdatedAt(new Date());
 
-        try {
+        try{
             categoryModelMapper.insertSelective(categoryModel);
-        } catch (DuplicateKeyException ex) {
+        }catch(DuplicateKeyException ex){
             throw new BusinessException(EmBusinessError.CATEGORY_NAME_DUPLICATED);
         }
+
+
         return get(categoryModel.getId());
     }
 
@@ -40,7 +42,6 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<CategoryModel> selectAll() {
-
         return categoryModelMapper.selectAll();
     }
 

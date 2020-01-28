@@ -19,11 +19,6 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-
-/*
-*Created by Stackingrule 2019.12.16
- */
-
 @Controller("/user")
 @RequestMapping("/user")
 public class UserController {

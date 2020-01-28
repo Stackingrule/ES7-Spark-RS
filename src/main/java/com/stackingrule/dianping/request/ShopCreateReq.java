@@ -38,6 +38,7 @@ public class ShopCreateReq {
     @NotBlank(message = "图标不能为空")
     private String iconUrl;
 
+
     public String getName() {
         return name;
     }
