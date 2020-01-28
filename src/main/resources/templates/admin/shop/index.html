@@ -78,78 +78,66 @@ License: You must have a valid license purchased only from themeforest(the above
     <div class="page-content-wrapper">
         <div class="page-content">
             <h3 class="page-title">
-                欢迎进入运营后台
+                门店管理
             </h3>
+            <div class="row" style="margin:20px 0 20px 0;">
+                <button type="button" class="btn green add">添加门店&nbsp;<i class="m-icon-swapright m-icon-white"></i></button>
+            </div>
 
+            <!-- END PAGE TITLE & BREADCRUMB-->
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat blue-madison">
-                        <div class="visual">
-                            <i class="fa fa-comments"></i>
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>品类门店
                         </div>
-                        <div class="details">
-                            <div class="number" th:text="${userCount}">
-
-                            </div>
-                            <div class="desc">
-                                注册用户数
-                            </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>图标</th>
+                                    <th>门店名</th>
+                                    <th>评分</th>
+                                    <th>人均价格</th>
+                                    <th>品类信息</th>
+                                    <th>标签</th>
+                                    <th>开始营业时间</th>
+                                    <th>结束营业时间</th>
+                                    <th>地址</th>
+                                    <th>商家信息</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="shop:${data.list}">
+                                    <td th:text="${shop.id}"></td>
+                                    <td><img style="width:40px;height:40px;" th:src="${shop.iconUrl}"/></td>
+                                    <td th:text="${shop.name}"></td>
+                                    <td th:text="${shop.remarkScore}"</td>
+                                    <td th:text="${shop.pricePerMan}"</td>
+                                    <td th:text="${shop.categoryModel.name}"></td>
+                                    <td th:text="${shop.tags}"></td>
+                                    <td th:text="${shop.startTime}"></td>
+                                    <td th:text="${shop.endTime}"></td>
+                                    <td th:text="${shop.address}"></td>
+                                    <td th:text="${shop.sellerModel.name}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat red-pink">
-                        <div class="visual">
-                            <i class="fa fa-comments"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number" th:text="${sellerCount}">
-
-                            </div>
-                            <div class="desc">
-                                商户数
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat green-meadow">
-                        <div class="visual">
-                            <i class="fa fa-comments"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number" th:text="${categoryCount}">
-
-                            </div>
-                            <div class="desc">
-                                品类数
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="dashboard-stat yellow-crusta">
-                        <div class="visual">
-                            <i class="fa fa-comments"></i>
-                        </div>
-                        <div class="details">
-                            <div class="number" th:text="${shopCount}">
-
-                            </div>
-                            <div class="desc">
-                                门店数
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <ul id="page-container" class="pagination"></ul>
                 </div>
             </div>
         </div>
-
-
-            <!-- END PAGE CONTENT-->
-        </div>
+        <!-- END PAGE CONTENT-->
     </div>
-    <!-- END CONTENT -->
+</div>
+<!-- END CONTENT -->
 </div>
 <!-- END CONTAINER -->
 <footer th:replace="admin/common/footer :: footer"></footer>
@@ -199,13 +187,45 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL SCRIPTS -->
 <script th:inline="javascript">
 
-
-
-
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Index.init();
+
+
+
+//        var img = new Image();
+//        img.crossOrigin = ""; //跨域
+//        img.src = "https://wx.qxclub.cn/pointshop/confirm/presale/get_image_token.do?time=1560492013790";
+//        img.onload = function() {// 图片加载后执行的方法
+//            var base64 = getBase64Image(img);// 将图片转成base64格式的方法
+//            console.log(base64);
+//        };
+//        function getBase64Image(img){
+//            var canvas = document.createElement("canvas");// 创建一个canvas
+//            canvas.width = img.width; // 设置对应的宽高
+//            canvas.height = img.height;
+//            var ctx = canvas.getContext("2d"); // 二维绘图环境
+//            ctx.drawImage(img, 0, 0, img.width, img.height); // 将图片画在画布上
+//            var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase(); // 获取到图片的格式
+//            var dataURL = canvas.toDataURL("image/" + ext); // 得到base64 编码的 dataURL
+//            return dataURL;
+//        }
+
+
+        var baseUrl = "/admin/shop/index?page="
+        setUrl(baseUrl);
+        var totalSize = /*[[${data.total}]]*/;
+        var countPerPage = /*[[${data.pageSize}]]*/;
+        var allPage = /*[[${data.pages}]]*/;
+        setPage(document.getElementById("page-container"),allPage,/*[[${currentPage}]]*/);
+        if(allPage <= 1){
+            $("#page-container").hide();
+        }
+
+        $(".add").on("click", function(){
+            window.location.href = "/admin/shop/createpage";
+        });
 
     });
 </script>

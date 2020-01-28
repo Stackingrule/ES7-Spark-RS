@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Service
-public class SellerServiceIml implements SellerService {
+public class SellerServiceImpl implements SellerService {
 
     @Autowired
     private SellerModelMapper sellerModelMapper;
@@ -26,7 +26,7 @@ public class SellerServiceIml implements SellerService {
         sellerModel.setCreatedAt(new Date());
         sellerModel.setUpdatedAt(new Date());
         sellerModel.setRemarkScore(new BigDecimal(0));
-        sellerModel.setDisabledFlag((long) 0);
+        sellerModel.setDisabledFlag((int) 0);
         sellerModelMapper.insertSelective(sellerModel);
         return get(sellerModel.getId());
     }

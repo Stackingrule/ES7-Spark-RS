@@ -21,6 +21,9 @@ public enum EmBusinessError {
     //admin相关错误
     ADMIN_SHOULD_LOGIN(30001,"管理员需要先登录"),
 
+    // 品类名已存在
+    CATEGORY_NAME_DUPLICATED(40001, "品类明已存在");
+
     ;
 
     private Integer errCode;
