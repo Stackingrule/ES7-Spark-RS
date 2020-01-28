@@ -6,6 +6,9 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.stackingrule.dianping.service.CategoryService;
+import com.stackingrule.dianping.service.SellerService;
+import com.stackingrule.dianping.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -39,6 +42,14 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ShopService shopService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private SellerService sellerService;
 
 
     public static final String CURRENT_ADMIN_SESSION = "currentAdminSession";
@@ -48,7 +59,11 @@ public class AdminController {
     public ModelAndView index(){
 
         ModelAndView modelAndView = new ModelAndView("/admin/admin/index");
-        modelAndView.addObject("userCount",userService.countAllUser());
+
+        modelAndView.addObject("userCount", userService.countAllUser());
+        modelAndView.addObject("shopCount",shopService.countAllShop());
+        modelAndView.addObject("categoryCount",categoryService.countAllCategory());
+        modelAndView.addObject("sellerCount", sellerService.countAllSeller());
         modelAndView.addObject("CONTROLLER_NAME","admin");
         modelAndView.addObject("ACTION_NAME","index");
         return modelAndView;

@@ -14,4 +14,5 @@ public interface ShopService {
 
     List<ShopModel> selectAll();
 
+    Integer countAllShop();
 }

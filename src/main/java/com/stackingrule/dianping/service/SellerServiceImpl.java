@@ -55,4 +55,9 @@ public class SellerServiceImpl implements SellerService {
 
         return sellerModel;
     }
+
+    @Override
+    public Integer countAllSeller() {
+        return sellerModelMapper.countAllSeller();
+    }
 }

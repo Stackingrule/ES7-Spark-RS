@@ -13,5 +13,6 @@ public interface CategoryService {
 
     List<CategoryModel> selectAll();
 
-
+    Integer countAllCategory();
 }
+
