@@ -59,7 +59,9 @@ public interface ShopModelMapper {
      * @mbg.generated Sun Jul 21 18:38:57 CST 2019
      */
     int updateByPrimaryKey(ShopModel record);
-    List<ShopModel> recommend(@Param("longitude") BigDecimal longitude, @Param("latitude") BigDecimal latitude);
+    List<ShopModel> recommend(@Param("longitude") BigDecimal longitude,
+                              @Param("latitude") BigDecimal latitude);
+
     List<ShopModel> search(@Param("longitude") BigDecimal longitude,
                            @Param("latitude") BigDecimal latitude,
                            @Param("keyword") String keyword,
