@@ -200,11 +200,10 @@ License: You must have a valid license purchased only from themeforest(the above
             number = Math.round(number * Math.pow(10, n)) / Math.pow(10, n);
             return number;
         };
-
         $("#analyze").on("click",function(){
             $.ajax({
-                type : "POST",
-                url : "http://api.map.baidu.com/geocoder/v2/",
+                type : "GET",
+                url : "http://api.map.baidu.com/geocoding/v3/",
                 data:"address="+encodeURIComponent($("#address").val())+"&output=json&ak=3faPXM4QGrYErxMIWL51R8XoEjK5BWtK",
                 dataType:"jsonp",
                 jsonp:"callback",
